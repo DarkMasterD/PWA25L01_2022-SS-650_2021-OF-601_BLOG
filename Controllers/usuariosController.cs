@@ -134,7 +134,7 @@ namespace L01_NUMEROS_CARNETS.Controllers
 
             if (usuarios.Count == 0)
             {
-                return NotFound($"No se encontraron libros con el título '{rol}'.");
+                return NotFound($"No se encontro usuario con el rol buscado '{rol}'.");
             }
 
             return Ok(usuarios);
