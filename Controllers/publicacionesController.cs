@@ -95,18 +95,18 @@ namespace L01_NUMEROS_CARNETS.Controllers
         public IActionResult PublicacionesFiltradasPorUsuario(string usuario)
         {
             var publicaciones = (from p in _blogDBContext.publicaciones
-                            join u in _blogDBContext.usuarios on p.publicacionId equals u.usuarioId
-                            where u.nombre == usuario
+                            join u in _blogDBContext.usuarios on p.usuarioId equals u.usuarioId
+                            where u.nombreUsuario == usuario
                             select new
                             {
                                 u.usuarioId,
-                                u.nombre,
+                                u.nombreUsuario,
                                 p.titulo
                             }).ToList();
 
-            if (publicaciones.Count == 0)
+            if (!publicaciones.Any())
             {
-                return NotFound($"No se encontraron libros con el título '{usuario}'.");
+                return NotFound($"El usuario '{usuario}' no tiene publicaciones.");
             }
 
             return Ok(publicaciones);
